@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Menu from '../views/menu.vue';
 import NoHouse from '../views/previewCode/noHouse.vue';
 import Normal from '../views/previewCode/normal.vue';
+import AlipayIdCard from '../views/idCard/alipayIdCard.vue';
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/Normal',
     name: 'Normal',
     component: Normal
+  },
+  {
+    path: '/AlipayIdCard',
+    name: 'AlipayIdCard',
+    component: AlipayIdCard
   },
 ]
 

@@ -1,0 +1,110 @@
+:deep(.van-nav-bar__title) {
+  font-weight: bold;
+  font-size: 17px;
+}
+.share{
+  width: 17px;
+  height: 18px;
+}
+.nav-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 40px;
+  img{
+    width: 100%;
+  }
+  .time{
+    font-weight: bold;
+    color: #060606;
+    font-size: 15px;
+  }
+  .rigth{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .sign{
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-right: 5px;
+      height: 13px;
+      div{
+        width: 3.5px;
+        background: #cacaca;
+        border-radius: 0.5px;
+        margin: 0 0.9px;
+      }
+      .sign1{
+        height: 40%;
+      }
+      .sign2{
+        height: 60%;
+      }
+      .sign3{
+        height: 80%;
+      }
+      .sign4{
+        height: 100%;
+      }
+      .sign-active{
+        background: #080808;
+      }
+    }
+    .sign-text{
+      font-weight: bold;
+      font-size: 14px;
+      margin-right: 5px;
+    }
+    .battery{
+      width: 25px;
+      position: relative;
+      img{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 100%;
+        vertical-align: middle;
+      }
+      .rect{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70%;
+        height: 7.5px;
+        background: #333;
+        left: 2px;
+        border-radius: 2px;
+      }
+      .rect-red{
+        background: #ff4239;
+      }
+    }
+  }
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  h1{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+  }
+  .menu-btn{
+    border: solid 1px #ececec;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px;
+    svg{
+      width: 30px;
+    }
+    svg:first-child{
+      border-right: solid 1px #ececec;
+    }
+  }
+}

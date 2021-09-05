@@ -27,7 +27,7 @@
       @click-left="Router.go(-1)"
     >
       <template #right>
-        <img @click="donwLoad" class="share" src="../../assets/share.png"/>
+        <img class="share" src="../../assets/share.png"/>
       </template>
     </van-nav-bar>
     <div id="preview-body">

@@ -42,6 +42,12 @@ export default {
      }, {
        name: '普通预审码(有本人信息)'
      }]
+    }, {
+      name: '身份证',
+      childrens: [{
+        name: '支付宝电子身份证',
+        path: '/AlipayIdCard',
+      }]
     }];
     const goToPage = (path, name) => {
       router.push({
