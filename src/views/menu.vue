@@ -39,13 +39,14 @@ export default {
      }, {
        name: '普通预审码',
        path: '/Normal',
-     }, {
-       name: '普通预审码(有本人信息)'
      }]
     }, {
       name: '身份证',
       childrens: [{
-        name: '支付宝电子身份证',
+        name: '支付宝电子身份证(样式1)',
+        path: '/AlipayIdCard',
+      }, {
+        name: '支付宝电子身份证(样式2)',
         path: '/AlipayIdCard',
       }]
     }];

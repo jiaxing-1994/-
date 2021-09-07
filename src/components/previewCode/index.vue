@@ -1,26 +1,6 @@
 <template>
   <div id="preview-code">
-    <div class="nav-top">
-      <div class="time" @click="editTime('add')">{{showNowTime}}</div>
-      <div class="rigth" @click="getRandom">
-        <div class="sign">
-          <div :class="['sign1', signNum >= 1 ? 'sign-active' : '']"></div>
-          <div :class="['sign2', signNum >= 2 ? 'sign-active' : '']"></div>
-          <div :class="['sign3', signNum >= 3 ? 'sign-active' : '']"></div>
-          <div :class="['sign4', signNum >= 4 ? 'sign-active' : '']"></div>
-        </div>
-        <div class="sign-text">
-          4G
-        </div>
-        <div class="battery">
-          <div
-            class="rect"
-            :class="{'rect-red': batteryNum < 20}"
-            :style="{width: `${batteryNum}%`}"></div>
-          <img src="../../assets/dianci.png"/>
-        </div>
-      </div>
-    </div>
+    <nav-header></nav-header>
     <van-nav-bar
       title="我的资格预审"
       left-arrow
@@ -73,29 +53,18 @@
       <van-button style="margin: 10px" type="primary" size="small" @click="editName('confirm')">确定</van-button>
     </div>
   </van-popup>
-  <van-popup
-    v-model:show="isShowTime"
-  >
-    <div class="popup-box">
-      <van-datetime-picker
-        v-model="nowTime"
-        type="time"
-        title="请佳芮小朋友选择时间"
-        :min-hour="1"
-        :max-hour="23"
-        @confirm="editTime('confirm')"
-        @cancel="editTime('cancel')"
-      />
-    </div>
-  </van-popup>
 </template>
 
 <script>
 import html2canvas from 'html2canvas';
 import { ref, computed, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
+import navHeader from '../navHeader/index.vue';
 export default {
   name: 'previewCode',
+  components: {
+    navHeader,
+  },
   props: {
     type: {
       type: Number,
@@ -107,21 +76,6 @@ export default {
     const { name, isShow, editName } = usePopup();
     const { numCode, randomNum, getRandomCode } = useRandomCode();
     const { donwLoad } = useDownload();
-    const { isShowTime, editTime, nowTime, showNowTime } = useTime();
-
-    const signNum = ref('');
-    const batteryNum = ref('');
-    const getSignNum = () => {
-      signNum.value = Math.floor(Math.random() * 3) + 1;
-    }
-    const getBatteryNum = () => {
-      batteryNum.value = Math.floor(Math.random() * 60) + 10;
-    };
-    const getRandom = () => {
-      getSignNum();
-      getBatteryNum();
-    };
-    getRandom();
     const showName = computed(() => {
       const regx = /^.{1}/
       return name.value.replace(regx, '*');
@@ -132,17 +86,10 @@ export default {
       isShow,
       showName,
       numCode,
-      signNum,
-      batteryNum,
-      isShowTime,
-      nowTime,
-      showNowTime,
-      editTime,
       editName,
       randomNum,
       getRandomCode,
       donwLoad,
-      getRandom,
     };
   },
 }
@@ -200,34 +147,6 @@ function usePopup() {
     isShow,
     name,
     editName,
-  }
-}
-function useTime() {
-  const date = new Date();
-  const nowTime = ref(`${date.getHours()}:${date.getMinutes()}`);
-  const showNowTime = computed(() => {
-    const rege = /^(\d{1,2}):(\d{1,2})$/;
-    const match = nowTime.value.match(rege);
-    const hour = match[1].length === 1 ? `0${match[1]}` : match[1];
-    const min = match[2].length === 1 ? `0${match[2]}` : match[2];
-    return `${hour}:${min}`;
-  });
-  const isShowTime = ref(false);
-  const editTime = (type) => {
-    if (type === 'add') {
-      isShowTime.value = true;
-    } else if (type === 'confirm') {
-      console.log(nowTime.value);
-      isShowTime.value = false;
-    } else if (type === 'cancel') {
-      isShowTime.value = false;
-    }
-  };
-  return {
-    isShowTime,
-    nowTime,
-    showNowTime,
-    editTime,
   }
 }
 </script>
