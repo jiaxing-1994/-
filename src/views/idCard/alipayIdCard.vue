@@ -26,7 +26,7 @@
           </div>
           <div class="info">
             <h1>
-              身份证网证
+              身份证{{type === 1 ? '网证' : ''}}
               <img @click="switchEye(true)" v-if="!isShowMore" src="@assets/eye.png"/>
               <img @click="switchEye(false)" v-else src="@assets/eye2.png"/>
             </h1>
@@ -156,7 +156,7 @@ export default {
   },
 }
 function useInfoData(isShowMore) {
-  const name = ref('黄家兴');
+  const name = ref('张三');
   const showName = computed(() =>{
     const regx = /^(.*)(.{1})$/;
     return name.value.replace(regx, (value, match, match2) => {
@@ -167,7 +167,7 @@ function useInfoData(isShowMore) {
       return isShowMore.value ? value : `${num}${match2}`;
     });
   });
-  const id = ref('513022199411043315');
+  const id = ref('245822199905142254');
   const showId = computed(() => {
     const regx = /^(\d{1})(\d+)([\d|X]{1})$/;
     return id.value.replace(regx, (value, match1, match2, match3) => {
