@@ -32,11 +32,21 @@
             </h1>
             <div class="name">
               <p class="title">姓名</p>
-              <p class="value" @click="confirmNameBtn('add')">{{showName}}</p>
+              <p class="value" @click="confirmNameBtn('add')">
+                <span v-if="isShowMore">{{showName}}</span>
+                <span v-else>
+                  <img v-for="item in nameNum" :key="item"  src="@assets/star.png"/>{{showName}}
+                </span>
+              </p>
             </div>
             <div class="id">
               <p class="title">证件号</p>
-              <p class="value id-value" @click="confirmIdBtn('add')">{{showId}}</p>
+              <p class="value id-value" @click="confirmIdBtn('add')">
+                <span v-if="isShowMore">{{showId}}</span>
+                <span v-else>
+                  {{showId.split(',')[0]}}<img v-for="item in starNum" :key="item" src="@assets/star.png"/>{{showId.split(',')[1]}}
+                </span>
+              </p>
             </div>
           </div>
           <div class="icon-back">
@@ -87,7 +97,7 @@
     v-model:show="isShowIdPopup"
   >
     <div class="popup-box">
-      <van-field v-model="id" label="姓名" placeholder="请佳芮小朋友输入身份证号" />
+      <van-field v-model="id" label="身份证号" placeholder="请佳芮小朋友输入身份证号" />
       <van-button style="margin: 10px" type="primary" size="small" @click="confirmIdBtn('confirm')">确定</van-button>
     </div>
   </van-popup>
@@ -135,6 +145,18 @@ export default {
       isShowNoticeBar.value = !isShowNoticeBar.value;
     }
 
+    const starNum = [];
+    for (let i = 1; i <= 16; i += 1) {
+      starNum.push(i);
+    }
+    const nameNum = computed(() => {
+      const num = [];
+      for (let i = 1; i <= name.value.length - 1; i += 1) {
+        num.push(i);
+      }
+      return num;
+    });
+
     return {
       type,
       name,
@@ -152,6 +174,8 @@ export default {
       confirmIdBtn,
       switchNoticeBar,
       donwLoad,
+      starNum,
+      nameNum,
     };
   },
 }
@@ -164,18 +188,18 @@ function useInfoData(isShowMore) {
       for (let i = 0; i < match.length; i++) {
         num += '*'
       }
-      return isShowMore.value ? value : `${num}${match2}`;
+      return isShowMore.value ? value : `${match2}`;
     });
   });
   const id = ref('245822199905142254');
   const showId = computed(() => {
-    const regx = /^(\d{1})(\d+)([\d|X]{1})$/;
+    const regx = /^(\d{1})(\d*)([\d|X]{1})$/;
     return id.value.replace(regx, (value, match1, match2, match3) => {
       let num = '';
-      for (let i = 0; i< match2.length; i++) {
+      for (let i = 0; i< 16; i++) {
         num += '*'
       }
-      return isShowMore.value ? value : `${match1}${num}${match3}`;
+      return isShowMore.value ? value : `${match1},${match3}`;
     });
   });
   return {

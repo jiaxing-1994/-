@@ -9,7 +9,8 @@
         <div :class="['sign4', signNum >= 4 ? 'sign-active' : '']"></div>
       </div>
       <div class="sign-text">
-        4G
+        <span v-if="signType === 1">4G</span>
+        <img v-if="signType === 2" src="@assets/wifi.png"/>
       </div>
       <div class="battery">
         <div
@@ -46,15 +47,20 @@ export default {
     const { isShowTime, editTime, nowTime, showNowTime } = useTime();
     const signNum = ref('');
     const batteryNum = ref('');
+    const signType = ref(1);
     const getSignNum = () => {
       signNum.value = Math.floor(Math.random() * 3) + 1;
     }
     const getBatteryNum = () => {
       batteryNum.value = Math.floor(Math.random() * 60) + 10;
     };
+    const getSignType = () => {
+      signType.value = Math.random() > 0.5 ? 1 : 2;
+    };
     const getRandom = () => {
       getSignNum();
       getBatteryNum();
+      getSignType();
     };
     getRandom();
     return {
@@ -64,6 +70,7 @@ export default {
       showNowTime,
       signNum,
       batteryNum,
+      signType,
       getRandom,
 
     }
@@ -127,7 +134,7 @@ function useTime() {
         div{
           width: 3.5px;
           background: #cacaca;
-          border-radius: 0.5px;
+          border-radius: 1px;
           margin: 0 0.9px;
         }
         .sign1{
@@ -150,6 +157,11 @@ function useTime() {
         font-weight: bold;
         font-size: 14px;
         margin-right: 5px;
+        img{
+          width: 16px;
+          vertical-align: middle;
+          margin-top: -5px;
+        }
       }
       .battery{
         width: 25px;
